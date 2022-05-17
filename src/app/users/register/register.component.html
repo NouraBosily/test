@@ -1,0 +1,63 @@
+<img src="/assets/img/register.png"  class="mx-auto d-block" height="130 px">
+<form [formGroup]="registerForm" autocomplete="off" (submit)="onSubmit()">
+  <div class="form-group">
+    <label>اسم المستخدم</label>
+    <input type="text" placeholder="اسم المستخدم" class="form-control" formControlName="UserName" [class.is-invalid]="(submitted || f.UserName.touched) && f.UserName.errors">
+  <div class="text-danger" *ngIf="(submitted || f.UserName.touched) && f.UserName.errors">
+  من فضلك ادخل اسم المستخدم من فضلك 
+  </div>
+  </div>
+
+  <div class="form-group">
+    <label>كلمة السر</label>
+    <input type="password" placeholder="كلمة المرور" class="form-control" formControlName="Password" [class.is-invalid]="(submitted || f.Password.touched) && f.Password.errors">
+  <div class="text-danger" *ngIf="(submitted || f.Password.touched) && f.Password.errors">
+    <div *ngIf="f.Password.errors.required">
+        من فضلك ادخل كلمة السر
+    </div>
+    <div *ngIf="f.Password.errors.minlength">
+     من فضلك كلمة الحروف اكثر من اويساوي 4 ارقام
+    </div>
+  </div>
+  </div>
+
+  <div class="form-group">
+    <label>رتبة الامان </label>
+   
+    
+  <ng-select formControlName="RoleId" [items]="RolesList$|async"
+    bindLabel="Name"
+    bindValue="Name"
+    placeholder="Select Employee"
+  >
+  </ng-select>
+
+  <div class="text-danger" *ngIf="(submitted || f.RoleId.touched) && f.RoleId.errors">
+  من فضلك رتبة الامان
+    </div>
+      </div>
+
+
+  
+  
+  <div class="form-group">
+  <label>اسم الموظف</label>
+     
+  <ng-select formControlName="EmployeeId" [items]="EmployeesList$|async"
+    bindLabel="EmployeeName"
+    bindValue="EmployeeId"
+    placeholder="Select Employee"
+  >
+  </ng-select>
+<div class="text-danger" *ngIf="(submitted || f.EmployeeId.touched) && f.EmployeeId.errors">
+ من فضلك اختر الموظف
+  </div>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" class="btn btn-success" value="Submit">
+
+      <input type="button" (click)="onclose()" class="btn btn-danger" value="رجوع ">
+    </div>
+  
+</form>

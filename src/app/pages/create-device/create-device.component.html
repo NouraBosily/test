@@ -1,0 +1,293 @@
+<div class="container">
+  <span class="fill-remaining-space"></span>
+  <span style="font-size: 30px;"></span>
+  <span class="fill-remaining-space"></span>
+  <br><br> <br><br>
+  <form [formGroup]="deviceForm" *ngIf="deviceForm" class="normal-form" dir="rtl" (submit)="onSubmit()"
+    (keydown.enter)="$event.preventDefault()">
+    <input type="hidden" value="" formControlName="serial">
+    <input type="hidden" value="" formControlName="IDRelation">
+
+    <input type="hidden" value="" formControlName="affiliatemanagement">
+    <input type="hidden" value="" formControlName="ForOrder">
+
+    
+    <div class="row">
+     <div class="col-md-12">
+
+        <table width="100%">
+          <tr>
+        <!-- <div class="col-md-12"> -->
+          <td style="width: 160px;">
+          <!-- <div class="col-md-5"> -->
+
+            <div class="input-group" [ngClass]="showSections()">
+              <label style="margin: 0px 20px;">الإدارة</label>
+              <!-- <ng-select [items]="sections" formControlName="SectionId" bindLabel="name" bindValue="id"
+                (change)="onchangeSections($event)" placeholder="Select Section"
+                style="width: 300px; margin: 0px 20px;">
+              </ng-select> -->
+              <button  (click)="onchangeSections()" *ngIf="id == null" type="button">اختيار</button>
+
+            </div>
+          <!-- </div> -->
+          </td>
+
+          <!-- <ng-select  formControlName="SectionId" bindLabel="name" bindValue="id"
+          (change)="onchangeSections($event)"  placeholder="Select Section" style="width: 300px; margin: 0px 20px;" >
+          <ng-option *ngFor="let section of sections"  [(value)]="section.id">{{section.name}}</ng-option>
+        </ng-select> -->
+
+          <!--  <mat-form-field>
+            <mat-select formControlName="SectionId" placeholder="Select Section" >
+              <ng-container *ngFor="let section of sections" >
+                <mat-option [(value)]="section.id" (selectionChange)="onchangeSections($event.value)">{{section.name}}</mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field> -->
+          <td style="align-content: center;">
+          <!-- <div class="col-md-5"> -->
+
+            <div class="input-group">
+
+              <mat-form-field appearance="outline">
+                <mat-label></mat-label>
+                <textarea matInput maxlength="700"  [readonly]="isReadonly" style="margin: 0px" formControlName="Structure"></textarea>
+              </mat-form-field>
+
+              <!-- <label style="text-align: right;margin-left: 40px;"  *ngIf="insertedBefore">تم ادراج هذه الادارة من قبل هل تريد عرض بياناتها؟ </label>
+              <button type="button" *ngIf="insertedBefore" (click)="onShowDevice()">أجهزة الكمبيوتر</button> -->
+
+            </div>
+          <!-- </div> -->
+</td>
+        <!-- </div> -->
+
+      </tr>
+      <tr>
+        <td>
+          <label style="text-align: right;margin-left: 40px;">المنطقة الجمركية</label>
+          </td><td style="margin-right: 0px;">
+        <div class="form-group">
+          <div class="input-group">
+            
+            
+            <mat-form-field>
+              <mat-select formControlName="CustomsArea" placeholder="">
+                <ng-container *ngFor="let area of areasArray">
+                  <mat-option [(value)]="area.id">{{area.name}}</mat-option>
+                </ng-container>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+        </div></td>
+</tr>
+<tr>
+  <td>
+    <label style="text-align: right;margin-left: 40px;">عدد اجهزة الكمبيوتر </label>
+    </td>
+    <td>
+        <div class="form-group">
+          <div class="input-group">
+            
+            <!-- <div class="input-group-prepend"> -->
+            <input type="number" min="1" class="form-control" formControlName="numberofdevices">
+            <!-- </div> -->
+            <button type="button" *ngIf=" id != null" (click)="showComputers(id,1)">أجهزة الكمبيوتر</button>
+            
+          </div>
+        </div>
+      </td>
+</tr><tr>
+  <td>
+    <label style="text-align: right;margin-left: 40px;">عدد اجهزة الطابعة </label>
+    </td>
+    <td>
+        <div class="form-group">
+          <div class="input-group">
+            
+            <!-- <div class="input-group-prepend"> -->
+            <input type="number" min="1" class="form-control" formControlName="printers">
+            <!-- </div> -->
+            <button type="button" *ngIf="id != null" (click)="showComputers(id,2)">الطابعات</button>
+
+          </div>
+        </div>
+      </td>
+        </tr>
+        <tr>
+          <td>
+            <label style="text-align: right;margin-left: 40px;">عدد ماكينات التصوير </label>
+            </td>
+            <td>
+        <div class="form-group">
+          <div class="input-group">
+            
+            <!-- <div class="input-group-prepend"> -->
+            <input type="number" min="1" class="form-control" formControlName="photocopiers">
+            <!-- </div> -->
+            <button type="button" *ngIf=" id != null" (click)="showComputers(id,3)">ماكينات التصوير</button>
+
+          </div>
+        </div>
+      </td>
+        </tr>
+        <tr>
+          <td><label style="text-align: right;margin-left: 40px;">عدد اجهزة الفاكس </label></td>
+          <td>
+        <div class="form-group">
+          <div class="input-group">
+            
+            <!-- <div class="input-group-prepend"> -->
+            <input type="number" min="1" class="form-control" formControlName="fax">
+            <!-- </div> -->
+            <button type="button" *ngIf="id != null" (click)="showComputers(id,5)">فاكس</button>
+
+          </div>
+        </div>
+        </td>
+</tr>
+<tr>
+  <td>
+    <label style="text-align: right;margin-left: 40px;">عدد اجهزة الماسح الضوئي </label>
+</td>
+<td>
+        <div class="form-group">
+          <div class="input-group">
+            <!-- <div class="input-group-prepend"> -->
+            <input type="number" min="1" class="form-control" formControlName="scanner">
+            <!-- </div> -->
+            <button type="button" *ngIf="id != null" (click)="showComputers(id,4)">ماسح ضوئي</button>
+
+          </div>
+        </div>
+        </td>
+</tr>
+<tr>
+  <td>
+    <label style="text-align: right;margin-left: 40px;"> أخرى</label>
+
+    </td>
+    <td>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="number" min="1" class="form-control" formControlName="other">
+            <button *ngIf=" id != null" (click)="showComputers(id,7)">أخرى</button>
+
+          </div>
+        </div>
+</td>
+</tr>
+<tr>
+  <td>
+    <label style="text-align: right;margin-left: 40px;">الملاحظات </label>
+
+  </td>
+  <td>
+        <div class="form-group">
+          <div class="input-group">
+            <mat-form-field appearance="outline">
+              <!-- <mat-label>الملاحظات</mat-label> -->
+              <textarea matInput maxlength="700" style="margin: 0px" formControlName="Notes"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+  </td>
+</tr>
+
+
+<tr *ngIf="id != null">
+  <td >
+    <label style="text-align: right;margin-left: 40px;">الاحتياجات </label>
+  </td>
+  <td>
+    <label *ngIf="OrderNeedsCount != null" style="text-align: right;margin-left: 40px;">يوجد عدد {{OrderNeedsCount}} طلب</label> 
+    <button *ngIf=" id != null" style="margin-right:-3000;" (click)="showOrderNeeds(id)">إدراج</button>
+
+    
+    <!-- <div class="form-group">
+          <div class="input-group">
+            <mat-form-field appearance="outline">
+              <textarea matInput maxlength="700" style="margin: 0px;align-items: center;" formControlName="needs"></textarea>
+            </mat-form-field>
+            <div class="form-group">
+              <div class="input-group">
+          
+                <label style="text-align: right;margin-left: 40px;margin-right: 30px;margin-top: 20px;">تاريخ الطلب</label>
+          
+              <mat-form-field>
+                <input formControlName="needsOrderDate" [(value)]='needsOrderDate' matInput [matDatepicker]="pickerneedsOrderDate"
+                  placeholder="">
+                <mat-datepicker-toggle matSuffix [for]="pickerneedsOrderDate"></mat-datepicker-toggle>
+                <mat-datepicker #pickerneedsOrderDate></mat-datepicker>
+              </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        
+  </td>
+<td>
+
+  
+
+</td>
+
+
+
+</tr>
+
+
+<tr><td>
+  <label style="text-align: right;margin-left: 40px;" [hidden]="id != null">القائم بالادراج </label>
+
+  </td><td>
+        <div class="form-group">
+          <div class="input-group">
+            <!-- <div class="input-group-prepend"> -->
+            <input type="text" class="form-control" value="this.user.name" formControlName="username"
+              [hidden]="id != null" [readonly]="id == null">
+            <!-- </div> -->
+          </div>
+        </div>
+</td>
+</tr>
+<tr><td>
+  <label style="text-align: right;margin-left: 40px;" [hidden]="id == null">القائم بالتعديل </label>
+
+</td>
+<td>
+        <div class="form-group">
+          <div class="input-group">
+            <!-- <div class="input-group-prepend"> -->
+            <input type="text" class="form-control" value="this.user.name" formControlName="usereditor"
+              [hidden]="id == null" [readonly]="id != null">
+            <!-- </div> -->
+          </div>
+        </div>
+</td>
+</tr>
+</table>
+
+
+
+
+
+
+ </div>
+
+    </div>
+    <div class="button-box">
+      <div class="button-row">
+        <button id="myAnchor" mat-raised-button color="primary" type="submit">حفظ</button>
+
+
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+        <button id="showButton" mat-raised-button color="primary" (click)="goToAllDevices()" type="button">عرض جميع الإدارات المدرجة</button>
+
+      </div>
+    </div>
+  </form>
+</div>

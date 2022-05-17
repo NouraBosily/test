@@ -1,0 +1,45 @@
+<img src="./assets/img/login.png"  class="mx-auto d-block">
+<form [formGroup]="loginForm" *ngIf="loginForm" autocomplete="off" (submit)="onSubmit()">
+  <!-- <div class="row">
+    <div class="col-md-12">
+        <select formControlName="ServerIsn"  class="form-control" onselect="getServerDetails1(($event.source.value))">
+          <option value="150">الاسكندرية</option>         
+        </select>
+    </div>
+  </div>  -->
+    <div class="form-group">
+      <label style="color: azure;">اسم المستخدم</label>
+      <input type="text" class="form-control" placeholder="اسم المستخدم" formControlName="user" [class.is-invalid]="(submitted || f.user.touched) && f.user.errors">
+    <div class="text-danger" *ngIf="(submitted || f.user.touched) && f.user.errors">
+     من فضلك ادخل اسم المستخدم
+    </div>
+    </div>
+  
+    <div class="form-group">
+      <label style="color: azure;">كلمة المرور</label>
+      <input type="password" placeholder="كلمة المرور" class="form-control" formControlName="password" [class.is-invalid]="(submitted || f.password.touched) && f.password.errors">
+    <div class="text-danger" *ngIf="(submitted || f.password.touched) && f.password.errors">
+      <div *ngIf="f.password.errors.required">
+         من فضلك ادخل كلمة المرور
+      </div>
+      <div *ngIf="f.password.errors.minlength">
+      كلمة المرور لا يمكن ان تقل عن اربعه ارقام
+      </div>
+    </div>
+   <br>
+  </div>
+  <!-- <div class="form-group">
+
+      <mat-radio-group style="color: azure; align-items: initial;margin: 10px;" aria-label="Select an option" 
+      formControlName="type" [class.is-invalid]="(submitted || f.type.touched) && f.type.errors">
+        <mat-radio-button style="color: azure;"  value="1">&nbsp;&nbsp;وكيل فرعي</mat-radio-button> &nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-radio-button style="color: azure;" value="2">&nbsp;&nbsp;وكيل رئيسي</mat-radio-button>
+      </mat-radio-group>
+
+  </div>  -->
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-success" value="دخول">
+      </div>
+    
+  </form>

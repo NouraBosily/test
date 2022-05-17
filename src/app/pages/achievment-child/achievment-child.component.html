@@ -1,0 +1,144 @@
+
+<form [formGroup]="this.achievmentChildForm" *ngIf="achievmentChildForm" class="normal-form" dir="rtl"    (submit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+    <input type="hidden" value="" formControlName="ID">
+    <input type="hidden" value="" formControlName="OrderNeedsDetailsID">
+
+
+    <table style="width: 50%;">
+        <tr>
+            <td>
+                <label style="text-align: left;margin-left: 40px;">نوع الجهاز</label>
+
+            </td>
+            <td>
+                <div class="form-group ">
+                    <div class="input-group">
+
+
+                        <mat-form-field>
+                            <mat-select disabled formControlName="AchievementDeviceType" placeholder="">
+                                <ng-container *ngFor="let type of deviceTypeArray">
+                                    <mat-option [(value)]="type1">{{deviceTypeArray[type1-1].name}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label style="text-align: left;margin-left: 40px;">حالة الجهاز</label>
+
+            </td>
+            <td>
+                <div class="form-group ">
+                    <div class="input-group">
+
+
+                        <mat-form-field>
+                            <mat-select formControlName="AchievementCase" placeholder="">
+                                <ng-container *ngFor="let case of printercaseArray">
+                                    <mat-option [(value)]="case.id">{{case.name}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label style="text-align: left;margin-left: 40px;">عدد الأجهزة</label>
+
+            </td>
+            <td>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <!-- <div class="input-group-prepend"> -->
+                        <input type="number" min="1" class="form-control" formControlName="NumberOf">
+                        <!-- </div> -->
+
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label style="text-align: left;margin-left: 40px;">موديل</label>
+
+            </td>
+            <td>
+                <div class="form-group">
+                    <div class="form-group">
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" formControlName="AchievementDeviceModel">
+
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label style="text-align: left;margin-left: 40px;">الماركة</label>
+
+            </td>
+            <td>
+                <div class="form-group">
+                    <div class="input-group">
+
+                        <mat-form-field>
+                            <mat-select formControlName="Mark" placeholder="">
+                                <ng-container *ngFor="let mark of MarksArray">
+                                    <mat-option [(value)]="mark.code">{{mark.devicemark}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <label style="text-align: left;margin-left: 40px;">تاريخ الصرف</label>
+
+            </td>
+            <td>
+                <div class="form-group">
+                    <div class="input-group">
+                      
+                          <mat-form-field>
+                            <input formControlName="devicedateAchievment" [(value)]='datechild' matInput [matDatepicker]="pickerdevicedateAchievment"
+                              placeholder="">
+                            <mat-datepicker-toggle matSuffix [for]="pickerdevicedateAchievment"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerdevicedateAchievment></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                </div>
+
+
+            </td>
+        </tr> 
+       
+
+
+
+
+
+    </table>
+
+
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-dark"><i class="fa fa-database"></i> حفظ</button>
+        <button id="showButton" mat-raised-button color="primary" (click)="backToAllAchievments()" type="button">عرض
+            جميع الأجهزة المصروفة</button>
+
+    </div>
+</form>

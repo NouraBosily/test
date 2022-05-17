@@ -1,0 +1,93 @@
+<mat-toolbar>
+    <span class="example-fill-remaining-space"></span>
+    <span>{{this.name}}</span>
+   
+    <span class="example-fill-remaining-space"></span>
+</mat-toolbar>
+<mat-toolbar>
+    <span class="example-fill-remaining-space"></span>
+<span [ngSwitch]="type">
+        
+    <span *ngSwitchCase="1">أجهزة كمبيوتر</span> 
+    <span *ngSwitchCase="2">الطابعات</span> 
+    <span *ngSwitchCase="3">ماكينات التصوير</span>   
+    <span *ngSwitchCase="4">الماسح الضوئي</span>   
+    <span *ngSwitchCase="5">أجهزة الفاكس</span>   
+    <span *ngSwitchCase="6">الشاشات</span>   
+    <span *ngSwitchCase="7">أخرى</span>   
+
+  </span>
+  <span class="example-fill-remaining-space"></span>
+</mat-toolbar>
+<div class="search-div">
+    <button style="float: right;" mat-raised-button [disabled]="this.devicesListLength>=disableFlag"  (click)="onCreate()">
+        <mat-icon>add</mat-icon> اضافة جديد
+    </button>
+
+    <i (click)="goToAllDevices()" class="material-icons">arrow_back</i>
+
+    <br><br>
+</div>
+<!-- [disabled]="this.devicesListLength>=disableFlag" -->
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="listData" matSort>
+        <!-- <ng-container matColumnDef='code'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>&nbsp;&nbsp; Code</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.code}}</mat-cell>
+        </ng-container> -->
+        <ng-container matColumnDef='Structure'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>الإدارة </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Structure }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef='Done'>
+            
+            <mat-header-cell *matHeaderCellDef mat-sort-header>تم تلبية الطلب </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+                <ng-container *ngIf="element.Done == 0">لا</ng-container>
+                <ng-container *ngIf="element.Done == 1 ">نعم</ng-container>
+
+
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef='OrderDate'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>تاريخ الطلب </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{this.datepipe.transform(element.OrderDate, 'yyyy-MM-dd') }}</mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef='actions'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+                <button mat-icon-button (click)="onEdit(element.ID,element.DeviceId)">
+                    <mat-icon>launch</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="onDelete(element.ID)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                Loading data...
+            </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                No data.
+            </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}">
+        </mat-footer-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,80 @@
+<div class="search-div">
+    <button style="float: right;" mat-raised-button (click)="onCreate()">
+        <mat-icon>add</mat-icon> اضافة جديد
+    </button>
+    <i (click)="goToAllDevices()" class="material-icons">arrow_back</i>
+    
+    <br><br>
+</div>
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="listData" matSort>
+        <!-- <ng-container matColumnDef='code'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>&nbsp;&nbsp; Code</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.code}}</mat-cell>
+        </ng-container> -->
+
+        <ng-container matColumnDef='devicemark'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>الموديل </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.devicemark }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef='devicecategory'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>الفئة </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                
+                <ng-container *ngIf="element.devicecategory == 1" > كمبيوتر</ng-container>
+                <ng-container *ngIf="element.devicecategory == 2 "> طابعة</ng-container>
+                <ng-container *ngIf="element.devicecategory == 3 "> ماكينة تصوير</ng-container>
+                <ng-container *ngIf="element.devicecategory == 4 "> ماسح ضوئي</ng-container>
+                <ng-container *ngIf="element.devicecategory == 5 ">فاكس </ng-container>
+                <ng-container *ngIf="element.devicecategory == 6 "> شاشة</ng-container>
+                <ng-container *ngIf="element.devicecategory == 7 "> أخرى</ng-container>
+
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef='CustomsArea'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header>المنطقة الجمركية </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <ng-container *ngIf="element.CustomsArea == 1" > شمالية و غربية</ng-container>
+                <ng-container *ngIf="element.CustomsArea == 2 "> وسطى و جنوبية</ng-container>
+                <ng-container *ngIf="element.CustomsArea == 3 "> شرقية</ng-container>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef='actions'>
+            <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *matCellDef="let element">
+
+                <button mat-icon-button
+                    (click)="onEdit(element.ID)">
+                    <mat-icon>launch</mat-icon>
+                </button>
+                <button mat-icon-button color="warn"
+                    (click)="onDelete(element.ID)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="loading">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                Loading data...
+            </mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="noData">
+            <mat-footer-cell *matFooterCellDef colspan="6">
+                No data.
+            </mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}">
+        </mat-footer-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
