@@ -29,8 +29,6 @@ import 'moment/locale/ar';
 import 'moment/locale/fr';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AttendanceComponent } from './attendance/attendance.component';
-import { Test1Component } from './test1/test1.component';
-import { Test2Component } from './test2/test2.component';
 
 
 @NgModule({
@@ -53,8 +51,6 @@ import { Test2Component } from './test2/test2.component';
     PagesComponent,
     ForbiddenComponent,
     AttendanceComponent,
-    Test1Component,
-    Test2Component
     
   ],
   
